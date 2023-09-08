@@ -1,15 +1,16 @@
 #include "tabsettingswidget.h"
 #include "ui_tabsettingswidget.h"
 
-TabSettingsWidget::TabSettingsWidget(TabSettings::Mode mode, QString address, QWidget *parent) :
+TabSettingsWidget::TabSettingsWidget(TabSettings* settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TabSettingsWidget)
+    ui(new Ui::TabSettingsWidget),
+    m_tabSettings(settings)
 {
     ui->setupUi(this);
 
-    m_tabSettings = new TabSettings(mode, address);
-    m_tabSettings->loadFromSettings();
-
+    ui->roundSpinBox->setValue(m_tabSettings->roundNumber());
+    ui->roundSpinBox_2->setValue(m_tabSettings->refreshRate());
+    ui->tabCountSpinBox->setValue(m_tabSettings->tabCount());
 
 }
 

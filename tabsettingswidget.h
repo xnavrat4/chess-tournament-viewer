@@ -15,7 +15,7 @@ class TabSettingsWidget : public QWidget
 
 
 public:
-    explicit TabSettingsWidget(TabSettings::Mode type, QString address, QWidget *parent = nullptr);
+    explicit TabSettingsWidget(TabSettings *settings, QWidget *parent = nullptr);
     ~TabSettingsWidget();
 
 

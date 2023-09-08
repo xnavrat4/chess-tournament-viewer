@@ -16,26 +16,32 @@ MainWindow::MainWindow(QWidget *parent)
 
     loadSettings();
 
-    m_pairingSettingsWidget = new TabSettingsWidget(TabSettings::Pairings, ui->tournamentURLlineEdit->text());
+    auto url = ui->tournamentURLlineEdit->text();
+
+    auto pairingSettings = new TabSettings(TabSettings::Pairings, url);
+    pairingSettings->loadFromSettings();
+    m_pairingSettingsWidget = new TabSettingsWidget(pairingSettings);
     ui->verticalLayout->addWidget(m_pairingSettingsWidget);
 
-
-    m_standingsSettingsWidget = new TabSettingsWidget(TabSettings::Standings, ui->tournamentURLlineEdit->text());
+    auto standingSettings = new TabSettings(TabSettings::Standings, url);
+    standingSettings->loadFromSettings();
+    m_standingsSettingsWidget = new TabSettingsWidget(standingSettings);
     ui->verticalLayout_3->addWidget(m_standingsSettingsWidget);
 
-
-    m_startingRankSettingsWidget = new TabSettingsWidget(TabSettings::StartingRank, ui->tournamentURLlineEdit->text());
+    auto startingRankSettings = new TabSettings(TabSettings::StartingRank, url);
+    startingRankSettings->loadFromSettings();
+    m_startingRankSettingsWidget = new TabSettingsWidget(startingRankSettings);
     ui->verticalLayout_5->addWidget(m_startingRankSettingsWidget);
 
 
 
-    m_startingRankDialog = new EnhancedDialog(m_startingRankSettingsWidget->tabSettings());
+    m_startingRankDialog = new EnhancedDialog(startingRankSettings);
     connect(m_startingRankSettingsWidget, &TabSettingsWidget::signalSettings, m_startingRankDialog, &EnhancedDialog::updateSettings);
 
-    m_pairingsDialog = new EnhancedDialog(m_pairingSettingsWidget->tabSettings());
+    m_pairingsDialog = new EnhancedDialog(pairingSettings);
     connect(m_pairingSettingsWidget, &TabSettingsWidget::signalSettings, m_pairingsDialog, &EnhancedDialog::updateSettings);
 
-    m_standingsDialog = new EnhancedDialog(m_standingsSettingsWidget->tabSettings());
+    m_standingsDialog = new EnhancedDialog(standingSettings);
     connect(m_standingsSettingsWidget, &TabSettingsWidget::signalSettings, m_standingsDialog, &EnhancedDialog::updateSettings);
 
 

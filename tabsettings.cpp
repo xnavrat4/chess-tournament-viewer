@@ -75,15 +75,14 @@ QString TabSettings::getFullAddress()
 {
     auto suffix = QString();
     switch(m_type){
-
     case StartingRank:
-        suffix = QString("lan=5&art=2&rd=%1").arg(m_roundNumber);
+        suffix = "lan=5&art=0";
         break;
     case Standings:
         suffix = QString("lan=5&art=1&rd=%1").arg(m_roundNumber);
         break;
     case Pairings:
-        suffix = "lan=5&art=0";
+        suffix = QString("lan=5&art=2&rd=%1").arg(m_roundNumber);
         break;
     default:break;
     }
