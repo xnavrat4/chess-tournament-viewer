@@ -16,6 +16,12 @@ EnhancedDialog::EnhancedDialog(TabSettings *settings) :
     init();
 }
 
+EnhancedDialog::~EnhancedDialog()
+{
+    m_settings->setGeometry(saveGeometry());
+    m_settings->saveToSettings();
+}
+
 void EnhancedDialog::init()
 {
     QLayoutItem* item;
@@ -38,6 +44,9 @@ void EnhancedDialog::init()
         m_view.append(engineView);
         m_layout->addWidget(engineView);
         engineView->load(m_settings->getFullAddress());
+        engineView->page()->runJavaScript(QString(QString("window.scrollTo(%1, %2);").arg(m_settings->scrollPosition().x()).arg(m_settings->scrollPosition().y())));
+        connect(engineView->page(), &QWebEnginePage::geometryChangeRequested, this, [] (QRect r) {qDebug()<< r;});
+        connect(engineView->page(), &QWebEnginePage::scrollPositionChanged, this, [this] (QPointF r) {m_settings->setScrollPosition(r); m_settings->saveToSettings();});
     }
 }
 

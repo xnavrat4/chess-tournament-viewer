@@ -12,6 +12,26 @@ void TabSettings::setRefreshRate(int newRefreshRate)
     m_refreshRate = newRefreshRate;
 }
 
+QByteArray TabSettings::geometry() const
+{
+    return m_geometry;
+}
+
+void TabSettings::setGeometry(const QByteArray &newGeometry)
+{
+    m_geometry = newGeometry;
+}
+
+QPointF TabSettings::scrollPosition() const
+{
+    return m_scrollPosition;
+}
+
+void TabSettings::setScrollPosition(QPointF newScrollPosition)
+{
+    m_scrollPosition = newScrollPosition;
+}
+
 TabSettings::TabSettings(Mode mode, QString address):
     m_address(address),
     m_type(mode)
@@ -26,6 +46,8 @@ void TabSettings::saveToSettings()
     settings.setValue("tabCount", m_tabCount);
     settings.setValue("roundNumber", m_roundNumber);
     settings.setValue("refreshRate", m_refreshRate);
+    settings.setValue("geometry", m_geometry);
+    settings.setValue("scroll", m_scrollPosition);
     //settings.setValue("address", m_address);
     settings.endGroup();
 }
@@ -37,6 +59,8 @@ void TabSettings::loadFromSettings()
     m_tabCount = settings.value("tabCount").toInt();
     m_roundNumber = settings.value("roundNumber").toInt();
     m_refreshRate = settings.value("refreshRate").toInt();
+    m_geometry = settings.value("geometry").toByteArray();
+    m_scrollPosition = settings.value("scroll").toPointF();
     //m_address = settings.value("address").toString();
 }
 

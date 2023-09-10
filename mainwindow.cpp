@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     loadSettings();
-
     auto url = ui->tournamentURLlineEdit->text();
 
     auto pairingSettings = new TabSettings(TabSettings::Pairings, url);
@@ -63,6 +62,7 @@ void MainWindow::saveSettings()
 
     settings.setValue("address", ui->tournamentURLlineEdit->text());
     settings.setValue("fullscreen", ui->checkBox->isChecked());
+    settings.setValue("geometry", saveGeometry());
     settings.endGroup();
 }
 
@@ -73,6 +73,7 @@ void MainWindow::loadSettings()
 
     ui->tournamentURLlineEdit->setText(settings.value("address").toString());
     ui->checkBox->setCheckState(settings.value("fullscreen").toBool() ? Qt::Checked : Qt::Unchecked);
+    restoreGeometry(settings.value("geometry").toByteArray());
     settings.endGroup();
 }
 

@@ -1,6 +1,7 @@
 #ifndef TABSETTINGS_H
 #define TABSETTINGS_H
 
+#include <QRect>
 #include <QString>
 
 
@@ -20,6 +21,8 @@ private:
     int m_refreshRate = 0;
     QString m_address;
     Mode m_type;
+    QByteArray m_geometry;
+    QPointF m_scrollPosition;
 
 public:
     TabSettings(Mode mode, QString address);
@@ -38,6 +41,10 @@ public:
     QString getFullAddress();
     int refreshRate() const;
     void setRefreshRate(int newRefreshRate);
-};
+    QByteArray geometry() const;
+    void setGeometry(const QByteArray &newGeometry);
+    QPointF scrollPosition() const;
+    void setScrollPosition(QPointF newScrollPosition);
+    };
 
 #endif // TABSETTINGS_H
