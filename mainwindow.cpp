@@ -32,8 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_startingRankSettingsWidget = new TabSettingsWidget(startingRankSettings);
     ui->verticalLayout_5->addWidget(m_startingRankSettingsWidget);
 
-
-
     m_startingRankDialog = new EnhancedDialog(startingRankSettings);
     connect(m_startingRankSettingsWidget, &TabSettingsWidget::signalSettings, m_startingRankDialog, &EnhancedDialog::updateSettings);
 
@@ -52,6 +50,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     saveSettings();
+    delete m_standingsSettingsWidget;
+    delete m_pairingSettingsWidget;
+    delete m_startingRankSettingsWidget;
     delete ui;
 }
 
