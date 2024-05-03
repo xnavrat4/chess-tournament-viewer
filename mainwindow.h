@@ -38,5 +38,6 @@ private:
     BaseEnhancedDialog* m_startingRankDialog = nullptr;
     BaseEnhancedDialog* m_standingsDialog = nullptr;
 
+    void createTab(QString url, TabSettingsWidget*& settingsWidget, BaseEnhancedDialog*& dialog, TabSettings::Mode settingsType, QVBoxLayout*& layout);
 };
 #endif // MAINWINDOW_H

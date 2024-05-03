@@ -5,7 +5,9 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QWebEngineView>
+#include <dialogs/refreshenhanceddialog.h>
 #include <settings/tabsettings.h>
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,41 +19,21 @@ MainWindow::MainWindow(QWidget *parent)
     loadSettings();
     auto url = ui->tournamentURLlineEdit->text();
 
-    auto pairingSettings = new TabSettings(TabSettings::Pairings, url);
-    pairingSettings->loadFromSettings();
-    m_pairingSettingsWidget = new TabSettingsWidget(pairingSettings);
-    ui->verticalLayout->addWidget(m_pairingSettingsWidget);
-
-    auto standingSettings = new TabSettings(TabSettings::Standings, url);
-    standingSettings->loadFromSettings();
-    m_standingsSettingsWidget = new TabSettingsWidget(standingSettings);
-    ui->verticalLayout_3->addWidget(m_standingsSettingsWidget);
-
-    auto startingRankSettings = new TabSettings(TabSettings::StartingRank, url);
-    startingRankSettings->loadFromSettings();
-    m_startingRankSettingsWidget = new TabSettingsWidget(startingRankSettings);
-    ui->verticalLayout_5->addWidget(m_startingRankSettingsWidget);
-    
-    m_startingRankDialog = new BaseEnhancedDialog(startingRankSettings);
-    connect(m_startingRankSettingsWidget, &TabSettingsWidget::signalSettings, m_startingRankDialog, &BaseEnhancedDialog::updateSettings);
-    
-    m_pairingsDialog = new BaseEnhancedDialog(pairingSettings);
-    connect(m_pairingSettingsWidget, &TabSettingsWidget::signalSettings, m_pairingsDialog, &BaseEnhancedDialog::updateSettings);
-    
-    m_standingsDialog = new BaseEnhancedDialog(standingSettings);
-    connect(m_standingsSettingsWidget, &TabSettingsWidget::signalSettings, m_standingsDialog, &BaseEnhancedDialog::updateSettings);
-
-
+    createTab(url, m_pairingSettingsWidget, m_pairingsDialog, TabSettings::Pairings, ui->verticalLayout);
+    createTab(url, m_standingsSettingsWidget, m_standingsDialog, TabSettings::Standings, ui->verticalLayout_3);
+    createTab(url, m_startingRankSettingsWidget, m_startingRankDialog, TabSettings::StartingRank, ui->verticalLayout_5);
 
     connect(ui->showPushButton, &QAbstractButton::clicked, this, &MainWindow::onShow);
-
 }
 
 MainWindow::~MainWindow()
 {
     saveSettings();
     delete m_standingsSettingsWidget;
+    delete m_standingsDialog;
     delete m_pairingSettingsWidget;
+    delete m_pairingsDialog;
+    delete m_startingRankDialog;
     delete m_startingRankSettingsWidget;
     delete ui;
 }
@@ -107,3 +89,13 @@ void MainWindow::on_pushButton_clicked()
     saveSettings();
 }
 
+void MainWindow::createTab(QString url, TabSettingsWidget*& settingsWidget, BaseEnhancedDialog*& dialog, TabSettings::Mode settingsType, QVBoxLayout*& layout)
+{
+    auto settings = new TabSettings(settingsType, url);
+    settings->loadFromSettings();
+    settingsWidget = new TabSettingsWidget(settings);
+    layout->addWidget(settingsWidget);
+
+    dialog = settingsType == TabSettings::Pairings ? new RefreshEnhancedDialog(settings) : new BaseEnhancedDialog(settings);
+    connect(settingsWidget, &TabSettingsWidget::signalSettings, dialog, &BaseEnhancedDialog::updateSettings);
+}
