@@ -41,7 +41,7 @@ jobs:
           target:       desktop
           arch:         win64_msvc2019_64
           dir:          ${{ runner.temp }}
-          modules:      core gui network webenginewidgets
+          modules:      qtnetwork qtwebengine
           setup-python: false
 
       - name: (4) Download JOM
