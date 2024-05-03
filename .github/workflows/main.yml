@@ -38,7 +38,6 @@ jobs:
         with:
           version:      ${{ env.QT_VERSION }}
           host:         windows
-          target:       desktop
           arch:         win64_msvc2019_64
           dir:          ${{ runner.temp }}
           modules:      qtnetwork qtwebengine
