@@ -9,7 +9,7 @@ defaults:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
-  QT_VERSION:   6.2.4
+  QT_VERSION:   6.2.0
   ARTIFACT:     chess-tournament-viewer.zip
 
 jobs:
