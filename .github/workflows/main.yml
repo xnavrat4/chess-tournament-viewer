@@ -34,7 +34,7 @@ jobs:
           host:         windows
           arch:         win64_msvc2019_64
           dir:          ${{ runner.temp }}
-          modules:      qtnetwork qtwebengine
+          modules:      qtconnectivity qtwebview
           setup-python: false
 
       - name: (4) Download JOM
