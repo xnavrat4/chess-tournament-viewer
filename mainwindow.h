@@ -23,9 +23,10 @@ private:
     void loadSettings();
 
 private slots:
+    BaseEnhancedDialog *getCurrentDialog(int tabIndex);
     void onShow();
-
     void on_pushButton_clicked();
+    void onTabChanged(int tabIndex);
 
 private:
     Ui::MainWindow *ui;

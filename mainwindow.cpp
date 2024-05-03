@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     createTab(url, m_standingsSettingsWidget, m_standingsDialog, TabSettings::Standings, ui->verticalLayout_3);
     createTab(url, m_startingRankSettingsWidget, m_startingRankDialog, TabSettings::StartingRank, ui->verticalLayout_5);
 
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &MainWindow::onTabChanged);
     connect(ui->showPushButton, &QAbstractButton::clicked, this, &MainWindow::onShow);
 }
 
@@ -58,29 +59,39 @@ void MainWindow::loadSettings()
     settings.endGroup();
 }
 
-void MainWindow::onShow()
+BaseEnhancedDialog* MainWindow::getCurrentDialog(int tabIndex)
 {
-    m_startingRankDialog->hide();
-    m_standingsDialog->hide();
-    m_pairingsDialog->hide();
-
-    auto isFullScreen = ui->checkBox->isChecked();
-
-    switch (ui->tabWidget->currentIndex()) {
+    switch (tabIndex) {
     case 0:
-        m_startingRankDialog->show(isFullScreen);
-        break;
+        return m_startingRankDialog;
     case 1:
-        m_pairingsDialog->show(isFullScreen);
-        break;
+        return m_pairingsDialog;
     case 2:
-        m_standingsDialog->show(isFullScreen);
-        break;
+        return m_standingsDialog;
     default:
-        break;
+        return nullptr;
     }
 }
+void MainWindow::onShow() {
+    auto dialog = getCurrentDialog(ui->tabWidget->currentIndex());
 
+    if (dialog->isVisible()){
+        dialog->hide();
+    }else {
+        dialog->show(ui->checkBox->isChecked());
+    }
+    ui->showPushButton->setText(dialog->isVisible() ? "Hide" : "Show");
+}
+
+void MainWindow::onTabChanged(int tabIndex)
+{
+    auto dialog = getCurrentDialog(tabIndex);
+    if (dialog == nullptr){
+        return;
+    }
+
+    ui->showPushButton->setText(dialog->isVisible() ? "Hide" : "Show");
+}
 
 void MainWindow::on_pushButton_clicked()
 {

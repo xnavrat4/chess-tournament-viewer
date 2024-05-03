@@ -55,10 +55,22 @@ void BaseEnhancedDialog::init()
     }
 }
 
+bool BaseEnhancedDialog::isVisible()
+{
+    return m_visible;
+}
+
 void BaseEnhancedDialog::show(bool fullscreen)
 {
+    m_visible = true;
     init();
     fullscreen ? QDialog::showFullScreen() : QDialog::show();
+}
+
+void BaseEnhancedDialog::hide()
+{
+    m_visible = false;
+    QDialog::hide();
 }
 
 void BaseEnhancedDialog::updateSettings(TabSettings* settings)
