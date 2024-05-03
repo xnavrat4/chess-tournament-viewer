@@ -4,7 +4,7 @@
 #include "dialogs/enhanceddialog.h"
 #include <QHBoxLayout>
 #include <QMainWindow>
-#include <tabsettingswidget.h>
+#include <settings/tabsettingswidget.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
