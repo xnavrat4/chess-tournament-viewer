@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "enhanceddialog.h"
+#include "dialogs/enhanceddialog.h"
 #include <QHBoxLayout>
 #include <QMainWindow>
 #include <tabsettingswidget.h>
@@ -33,10 +33,10 @@ private:
     TabSettingsWidget* m_pairingSettingsWidget = nullptr;
     TabSettingsWidget* m_standingsSettingsWidget = nullptr;
     TabSettingsWidget* m_startingRankSettingsWidget = nullptr;
-
-    EnhancedDialog* m_pairingsDialog = nullptr;
-    EnhancedDialog* m_startingRankDialog = nullptr;
-    EnhancedDialog* m_standingsDialog = nullptr;
+    
+    BaseEnhancedDialog* m_pairingsDialog = nullptr;
+    BaseEnhancedDialog* m_startingRankDialog = nullptr;
+    BaseEnhancedDialog* m_standingsDialog = nullptr;
 
 };
 #endif // MAINWINDOW_H

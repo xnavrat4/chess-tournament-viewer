@@ -1,7 +1,7 @@
 #ifndef TABSETTINGSWIDGET_H
 #define TABSETTINGSWIDGET_H
 
-#include "tabsettings.h"
+#include "settings/tabsettings.h"
 #include <QWidget>
 
 namespace Ui {
@@ -17,8 +17,8 @@ class TabSettingsWidget : public QWidget
 public:
     explicit TabSettingsWidget(TabSettings *settings, QWidget *parent = nullptr);
     ~TabSettingsWidget();
-
-
+    
+    
     TabSettings *tabSettings() const;
 
 private slots:

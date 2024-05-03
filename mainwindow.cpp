@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QWebEngineView>
-#include <tabsettings.h>
+#include <settings/tabsettings.h>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -31,15 +31,15 @@ MainWindow::MainWindow(QWidget *parent)
     startingRankSettings->loadFromSettings();
     m_startingRankSettingsWidget = new TabSettingsWidget(startingRankSettings);
     ui->verticalLayout_5->addWidget(m_startingRankSettingsWidget);
-
-    m_startingRankDialog = new EnhancedDialog(startingRankSettings);
-    connect(m_startingRankSettingsWidget, &TabSettingsWidget::signalSettings, m_startingRankDialog, &EnhancedDialog::updateSettings);
-
-    m_pairingsDialog = new EnhancedDialog(pairingSettings);
-    connect(m_pairingSettingsWidget, &TabSettingsWidget::signalSettings, m_pairingsDialog, &EnhancedDialog::updateSettings);
-
-    m_standingsDialog = new EnhancedDialog(standingSettings);
-    connect(m_standingsSettingsWidget, &TabSettingsWidget::signalSettings, m_standingsDialog, &EnhancedDialog::updateSettings);
+    
+    m_startingRankDialog = new BaseEnhancedDialog(startingRankSettings);
+    connect(m_startingRankSettingsWidget, &TabSettingsWidget::signalSettings, m_startingRankDialog, &BaseEnhancedDialog::updateSettings);
+    
+    m_pairingsDialog = new BaseEnhancedDialog(pairingSettings);
+    connect(m_pairingSettingsWidget, &TabSettingsWidget::signalSettings, m_pairingsDialog, &BaseEnhancedDialog::updateSettings);
+    
+    m_standingsDialog = new BaseEnhancedDialog(standingSettings);
+    connect(m_standingsSettingsWidget, &TabSettingsWidget::signalSettings, m_standingsDialog, &BaseEnhancedDialog::updateSettings);
 
 
 

@@ -45,6 +45,7 @@ public:
     void setGeometry(const QByteArray &newGeometry);
     QPointF scrollPosition() const;
     void setScrollPosition(QPointF newScrollPosition);
-    };
+    Mode type() const;
+};
 
 #endif // TABSETTINGS_H

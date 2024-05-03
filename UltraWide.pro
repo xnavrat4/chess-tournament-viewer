@@ -9,16 +9,18 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    enhanceddialog.cpp \
+    dialogs/enhanceddialog.cpp \
+    dialogs/refreshenhanceddialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    tabsettings.cpp \
+    settings/tabsettings.cpp \
     tabsettingswidget.cpp
 
 HEADERS += \
-    enhanceddialog.h \
+    dialogs/enhanceddialog.h \
+    dialogs/refreshenhanceddialog.h \
     mainwindow.h \
-    tabsettings.h \
+    settings/tabsettings.h \
     tabsettingswidget.h
 
 FORMS += \

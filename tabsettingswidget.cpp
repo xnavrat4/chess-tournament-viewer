@@ -12,6 +12,10 @@ TabSettingsWidget::TabSettingsWidget(TabSettings* settings, QWidget *parent) :
     ui->roundSpinBox_2->setValue(m_tabSettings->refreshRate());
     ui->tabCountSpinBox->setValue(m_tabSettings->tabCount());
 
+    if (settings->type() != TabSettings::Pairings){
+        ui->roundSpinBox_2->hide();
+        ui->roundLabel_2->hide();
+    }
 }
 
 TabSettingsWidget::~TabSettingsWidget()

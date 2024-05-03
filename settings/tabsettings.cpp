@@ -32,6 +32,11 @@ void TabSettings::setScrollPosition(QPointF newScrollPosition)
     m_scrollPosition = newScrollPosition;
 }
 
+TabSettings::Mode TabSettings::type() const
+{
+    return m_type;
+}
+
 TabSettings::TabSettings(Mode mode, QString address):
     m_address(address),
     m_type(mode)
