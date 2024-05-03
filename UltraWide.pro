@@ -14,18 +14,18 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     settings/tabsettings.cpp \
-    tabsettingswidget.cpp
+    settings/tabsettingswidget.cpp
 
 HEADERS += \
     dialogs/enhanceddialog.h \
     dialogs/refreshenhanceddialog.h \
     mainwindow.h \
     settings/tabsettings.h \
-    tabsettingswidget.h
+    settings/tabsettingswidget.h
 
 FORMS += \
     mainwindow.ui \
-    tabsettingswidget.ui
+    settings/tabsettingswidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
