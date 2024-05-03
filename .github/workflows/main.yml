@@ -26,8 +26,9 @@ jobs:
         working-directory:  ${{ github.workspace }}
         run: |
           git fetch --all --tags -f
+          
       - name: (3) Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3.3.0
         with:
           version:      ${{ env.QT_VERSION }}
           host:         windows
