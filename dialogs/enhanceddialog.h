@@ -2,35 +2,36 @@
 #define ENHANCEDDIALOG_H
 
 #include "qwebengineview.h"
-#include "tabsettings.h"
+#include "settings/tabsettings.h"
 #include <QObject>
 #include <QDialog>
 #include <qboxlayout.h>
 #include <QNetworkCookie>
 
-class EnhancedDialog : public QDialog
+class BaseEnhancedDialog : public QDialog
 {
-private:
+
+protected:
     QList<QWebEngineView*> m_view;
     QHBoxLayout* m_layout;
     TabSettings* m_settings;
-    QTimer* m_refreshTimer;
+    bool m_visible = false;
+
+    void clearLayout();
 
 public:
-    EnhancedDialog(TabSettings *settings);
-    ~EnhancedDialog();
+    BaseEnhancedDialog(TabSettings *settings);
+    ~BaseEnhancedDialog();
 
     void init();
 
-    void show(bool fullscreen);
+    bool isVisible();
+
+    virtual void show(bool fullscreen);
+    void hide();
 
 public slots:
     void updateSettings(TabSettings* settings);
-
-private slots:
-    void saveScrollPosition();
-    void refreshViews();
-    void scrollToPosition();
 };
 
 #endif // ENHANCEDDIALOG_H
