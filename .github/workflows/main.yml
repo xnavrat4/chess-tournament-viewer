@@ -49,8 +49,10 @@ jobs:
         run:  |
               7z x jom.zip -ojom
               
-      - name: (6) Create build directory
-        run:  mkdir ${{ runner.temp }}\build
+      - name: (6) Create build and release directory
+        run: |  
+             mkdir ${{ runner.temp }}\build
+             mkdir ${{ runner.temp }}\release
 
       - name: (7) Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
@@ -62,8 +64,9 @@ jobs:
         run:  |
               qmake -r ${{ env.SOURCE_DIR }}\UltraWide.pro
               ${{ runner.temp }}\jom\jom -j2
-              cd release
-              windeployqt --qmldir ${{ env.SOURCE_DIR }} UltraWide.exe --pdb --release --compiler-runtime
+              copy release\UltraWide.exe ${{ runner.temp }}\release 
+              cd ${{ runner.temp }}\release
+              windeployqt --qmldir ${{ env.SOURCE_DIR }} UltraWide.exe --release --compiler-runtime
               copy C:\Windows\System32\concrt140.dll . 
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
@@ -72,7 +75,7 @@ jobs:
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
-              7z a chess-tournament-viewer.zip ${{ runner.temp }}\build\* -r
+              7z a chess-tournament-viewer.zip ${{ runner.temp }}\release\* -r
               
       - name: (10) Save build artifact
         uses: actions/upload-artifact@master
