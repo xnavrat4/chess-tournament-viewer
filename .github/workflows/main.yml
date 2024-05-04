@@ -34,7 +34,7 @@ jobs:
           version:      ${{ env.QT_VERSION }}
           host:         windows
           arch:         win64_msvc2019_64
-          modules:      qtwebchannel, qtbase, qtwebengine, qtconnectivity, qt5compat, qtwebview, qttools
+          modules:      qtwebchannel qtbase qtwebengine qtconnectivity qt5compat qtwebview qttools
           setup-python: false
           tools:   tools_ifw tools_qtcreator,qt.tools.qtcreator
 
