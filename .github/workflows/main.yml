@@ -49,10 +49,11 @@ jobs:
         run:  |
               7z x jom.zip -ojom
               
-      - name: (6) Create build and release directory
+      - name: (6) Create directories
         run: |  
              mkdir ${{ runner.temp }}\build
              mkdir ${{ runner.temp }}\release
+             mkdir ${{ runner.temp }}\install
 
       - name: (7) Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
@@ -71,12 +72,13 @@ jobs:
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
+              cd ${{ runner.temp }}
               
-      - name: (9) Zip build
-        working-directory: ${{ runner.temp }}
-        run:  |
-              7z a chess-tournament-viewer.zip ${{ runner.temp }}\release\* -r
-              
+      - name: (9) Inno Setup Action
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.4
+        with:
+          path: ${{ runner.temp }}\deploy\innoscript.iss
+          
       - name: (10) Save build artifact
         uses: actions/upload-artifact@master
         with:
