@@ -30,12 +30,13 @@ jobs:
       - name: (3) Install Qt
         uses: jurplel/install-qt-action@v3.3.0
         with:
+          dir:          ${{ runner.temp }}
           version:      ${{ env.QT_VERSION }}
           host:         windows
           arch:         win64_msvc2019_64
-          dir:          ${{ runner.temp }}
           modules:      qtconnectivity qtwebview
           setup-python: false
+          tools:   tools_ifw tools_qtcreator,qt.tools.qtcreator
 
       - name: (4) Download JOM
         uses: suisei-cn/actions-download-file@v1
