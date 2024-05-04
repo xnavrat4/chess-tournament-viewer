@@ -1,8 +1,8 @@
-#define MyAppName "DummyApp1"
+#define MyAppName "UltraWide"
 #define MyAppVersion "1.0.0"
 #define MyAppPublisher "Patrik Navratil"
 #define MyAppURL "https://github.com/xnavrat4"
-#define MyAppExeName "dummyApp1.exe"
+#define MyAppExeName "ultrawide.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
