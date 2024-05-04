@@ -8,7 +8,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{378950D8-DCF9-4F58-8C0B-CAEBC893379B}}
+AppId={{28B07C0D-DCF9-4F58-8C0B-CAEBC893379B}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -18,8 +18,9 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputDir=.\instalacky
+OutputDir=..\install
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}
+SourceDir=..\deploy
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
