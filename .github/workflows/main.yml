@@ -86,10 +86,12 @@ jobs:
           prerelease: false
           
           
-      - name: Zip application folder
-        run: Compress-Archive -Path ${{ runner.temp }}\release -Destination chess-viewer.zip 
+      - name: (100 Zip application folder
+        working-directory: ${{ runner.temp }}
+        run:  |
+              7z a chess-tournament-viewer.zip ${{ runner.temp }}\release -r
 
-      - name: Upload artifact
+      - name: (11) Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: release
