@@ -87,7 +87,7 @@ jobs:
           
           
       - name: Zip application folder
-        run: zip -r chess-viewer.zip ${{ runner.temp }}\release
+        run: Compress-Archive -Path ${{ runner.temp }}\release -Destination chess-viewer.zip 
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
