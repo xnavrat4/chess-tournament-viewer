@@ -96,4 +96,4 @@ jobs:
         with:
           name: release
           path: |
-            application.zip
+             chess-tournament-viewer.zip
