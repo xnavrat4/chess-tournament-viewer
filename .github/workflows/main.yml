@@ -1,7 +1,9 @@
 name: Windows Release
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
 
 defaults:
   run:
@@ -80,13 +82,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
           
           
-      - name: (100 Zip application folder
+      - name: (10) Zip application folder
         working-directory: ${{ runner.temp }}
         run:  |
               7z a chess-tournament-viewer.zip ${{ runner.temp }}\release -r
@@ -97,3 +99,13 @@ jobs:
           name: release
           path: |
              ${{ runner.temp }}\chess-tournament-viewer.zip
+
+      - name: (12) Upload release zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ runner.temp }}\chess-tournament-viewer.zip
+          asset_name: chess-tournament-viewer.zip
+          asset_content_type: application/gzip
