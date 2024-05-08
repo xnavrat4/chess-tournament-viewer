@@ -74,13 +74,19 @@ jobs:
               copy C:\Windows\System32\vcruntime140.dll .
               cd ${{ runner.temp }}
               
-      - name: (9) Inno Setup Action
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.4
+      - name: (9) Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: ${{ runner.temp }}\deploy\innoscript.iss
-          
-      - name: (10) Save build artifact
-        uses: actions/upload-artifact@master
+          tag_name: v${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.ARTIFACT }}
-          path: ${{ runner.temp }}\install\*
+          name: release
+          path: ${{ runner.temp }}\release
