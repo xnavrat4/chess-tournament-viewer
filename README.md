@@ -53,6 +53,6 @@ Copy tournament url from chess-results (without query parameters, ends with .asp
 Save the settings.
 
 Choose what kind of information about the tournament you want to show (pairing, standings, starting rank).
-Choose number of tabs, refresh interval. 
+Choose number of tabs, round and refresh interval. 
 
 Click show to display N tabs of browser.
