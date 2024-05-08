@@ -1,0 +1,12 @@
+name: Ubuntu Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+      ARTIFACT: chess-tournament-viewer.zip
+    
