@@ -84,9 +84,14 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
+          
+          
+      - name: Zip application folder
+        run: zip -r chess-viewer.zip ${{ runner.temp }}\release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: release
-          path: ${{ runner.temp }}\release
+          path: |
+            application.zip
