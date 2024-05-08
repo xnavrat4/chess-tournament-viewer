@@ -91,7 +91,7 @@ jobs:
       - name: (10) Zip application folder
         working-directory: ${{ runner.temp }}
         run:  |
-              7z a chess-tournament-viewer.zip ${{ runner.temp }}\release -r
+              7z a chess-tournament-viewer.zip ${{ runner.temp }}\release\* -r
 
       - name: (11) Upload artifact
         uses: actions/upload-artifact@v2
